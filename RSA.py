@@ -81,10 +81,11 @@ def gera_inversivel(totiente:int) -> int:
         mdc,alpha,beta = euclidiano_extendido(e,totiente)
     return e
 
-# Gera as chaves do RSA
-def gera_chaves(precisao:int):
-    p = gera_primos(precisao)
-    q = gera_primos(precisao)
+# Recebe um inteiro qualquer >= 0, que definirá o tamanho dos primos p e q e, consequentemente, o grau de segurança da encriptação
+# Retorna as chaves do RSA
+def gera_chaves(protecao:int):
+    p = gera_primos(protecao)
+    q = gera_primos(protecao)
     n = p * q
     totiente = funcao_totiente(p,q)
     e = gera_inversivel(totiente)
@@ -143,8 +144,11 @@ def descriptar(blocos:list, n:int, d:int) -> str:
         letra = pow(codigo,d,n)
         texto += codigos_para_simbolos[letra]
     return texto
+ 
+# Função para testar a efetividade do código
+def test():
+    n, e, d, p, q, inverso_p_em_q, inverso_q_em_p, modulo_reduzido_d_em_pmenos,  modulo_reduzido_d_em_qmenos = gera_chaves(10)
+    texto = input("Frase qualquer: ")
+    print(descriptar((encriptar(texto,n,e)),n,d))
 
-
-n, e, d, p, q, inverso_p_em_q, inverso_q_em_p, modulo_reduzido_d_em_pmenos,  modulo_reduzido_d_em_qmenos = gera_chaves(11)
-texto = input("Frase qualquer: ")
-print(descriptar((encriptar(texto,n,e)),n,d))
+test()
