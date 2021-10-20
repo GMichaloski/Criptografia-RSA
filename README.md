@@ -10,7 +10,7 @@ entrada um natural n e gerar um número (provavelmente) primo p satisfazendo
 10n < p < 10n+2, sorteando p aleatoriamente no intervalo desejado e rodando
 10 testes de Miller–Rabin com bases b aleatórias no intervalo 1 < b < p − 1.
 (Naturalmente, p só deve ser aceito como provavelmente primo se todos os testes
-forem inconclusivos.)__
+forem inconclusivos.) <br />
 b. Uma função chamada gera_chaves (por favor use este nome) para gerar
 chaves do RSA. Sua função deve usar sua função da letra a para gerar primos
 p e q, cada um com aproximadamente 50 algarismos, e retornar:
