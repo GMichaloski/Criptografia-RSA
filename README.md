@@ -13,22 +13,21 @@ entrada um natural n e gerar um número (provavelmente) primo p satisfazendo
 forem inconclusivos.) <br />
 b. Uma função chamada gera_chaves (por favor use este nome) para gerar
 chaves do RSA. Sua função deve usar sua função da letra a para gerar primos
-p e q, cada um com aproximadamente 50 algarismos, e retornar:
-• n = pq
-• algum número e inversível módulo φ(n) = (p − 1)(q − 1)
-• o inverso d de e módulo φ(n)
-Para uma solução realmente completa, sua função deve retornar também:
-• p
-• q
-• o inverso de p módulo q
-• o inverso de q módulo p
-• a forma reduzida de d módulo p − 1
-• a forma reduzida de d módulo q − 1.
+p e q, cada um com aproximadamente 50 algarismos, e retornar: <br />
+• n = pq <br />
+• algum número e inversível módulo φ(n) = (p − 1)(q − 1) <br />
+• o inverso d de e módulo φ(n) <br />
+• p <br />
+• q <br />
+• o inverso de p módulo q <br />
+• o inverso de q módulo p <br />
+• a forma reduzida de d módulo p − 1 <br />
+• a forma reduzida de d módulo q − 1. <br />
 c. Uma função chamada encriptar (por favor use este nome) que recebe como
 entrada uma string texto e números n e e, e retorna uma lista de números que
 seja uma sequência válida dos blocos numéricos resultantes da encriptação do
-texto com chave pública de módulo n e expoente e.
+texto com chave pública de módulo n e expoente e. <br />
 d. Uma função chamada descriptar (por favor use este nome) que recebe
 como entrada uma lista blocos e números n e d, e retorna a string resultante
 da descriptação da sequência de blocos usando a chave privada de módulo n e
-expoente d.
+expoente d. <br />
