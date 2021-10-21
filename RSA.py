@@ -4,14 +4,10 @@ import random
 # Recebe um n inteiro qualquer, que terá sua primalidade verificada
 # Retorna um booleano True se n for primo e False se n não for primo
 def miller_rabin(n: int) -> bool:
-    if(n == 5):
-        return False
+    if((n <= 2 ) or (n == 5)):
+        return False 
     if(n == 3):
-        return True
-    if(n < 2):
-        return False
-    if (n%2 == 0):
-        return False # Esses quatro if's são para verificar os casos base
+        return True # Esses dois if's são para verificar os casos base
     fator_impar = (n-1)/2
     potencias_de_dois = 1  # n-1 = fator_impar * 2^{potencias_de_dois}
     while(fator_impar%2 == 0):
@@ -19,11 +15,11 @@ def miller_rabin(n: int) -> bool:
         potencias_de_dois += 1
     fator_impar = int(fator_impar)
     b = random.randrange(2, n-2) # Base aleatória no intervalo 1 < b < n-1
-    verificacao = pow(b,fator_impar, n)
-    if( verificacao == 1 or  verificacao == n-1):
+    verificacao = pow(b,2, n)
+    if( verificacao == 1 or verificacao == n-1):
         return True
     for i in range(potencias_de_dois - 2):
-        verificacao = pow(verificacao,verificacao,n)
+        verificacao = pow(verificacao,2,n)
         if(verificacao == 1):
             return False
         if(verificacao == n-1):
@@ -147,8 +143,8 @@ def descriptar(blocos:list, n:int, d:int) -> str:
  
 # Função para testar a efetividade do código
 def test():
-    n, e, d, p, q, inverso_p_em_q, inverso_q_em_p, modulo_reduzido_d_em_pmenos,  modulo_reduzido_d_em_qmenos = gera_chaves(10)
+    n, e, d, p, q, inverso_p_em_q, inverso_q_em_p, modulo_reduzido_d_em_pmenos,  modulo_reduzido_d_em_qmenos = gera_chaves(0)
     texto = input("Frase qualquer: ")
     print(descriptar((encriptar(texto,n,e)),n,d))
 
-test()
+print(gera_primos(16))
