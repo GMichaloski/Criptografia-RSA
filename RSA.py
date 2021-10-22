@@ -1,30 +1,39 @@
-from math import e
 import random
 
+# Recebe um n inteiro qualquer  
+# Retorna k, q com q ímpar e n = (2**k)*q
+def fatorando_2(n:int):
+  k = 0
+  q = n
+  while q%2 == 0:
+    q //= 2
+    k += 1
+  return k, q
+
+
 # Recebe um n inteiro qualquer, que terá sua primalidade verificada
-# Retorna um booleano True se n for primo e False se n não for primo
+# Retorna um booleano True se n for possivelmente primo e False se n não for primo
 def miller_rabin(n: int) -> bool:
-    if((n <= 2 ) or (n == 5)):
-        return False 
-    if(n == 3):
-        return True # Esses dois if's são para verificar os casos base
-    fator_impar = (n-1)/2
-    potencias_de_dois = 1  # n-1 = fator_impar * 2^{potencias_de_dois}
-    while(fator_impar%2 == 0):
-        fator_impar = fator_impar/2
-        potencias_de_dois += 1
-    fator_impar = int(fator_impar)
-    b = random.randrange(2, n-2) # Base aleatória no intervalo 1 < b < n-1
-    verificacao = pow(b,2, n)
-    if( verificacao == 1 or verificacao == n-1):
-        return True
-    for i in range(potencias_de_dois - 2):
-        verificacao = pow(verificacao,2,n)
-        if(verificacao == 1):
-            return False
-        if(verificacao == n-1):
-            return True
-    return False # Por default será falso para evitarmos a passagem de números não primos
+
+  if n%2 == 0 or n <= 1: # Tratando a entrada
+    return False
+  base = random.randint(2,n)  # Gerando uma base aleatória
+  base = (base % n)
+  if base == 0 or base == 1:
+    return True
+
+  k, q = fatorando_2(n-1) # Encontrando k, q
+  r = pow(base, q, n)
+  if r == 1 or r == n-1:
+    return True
+  i = 0
+  while True:
+    r = pow(r, 2, n)
+    i += 1
+    if r == 1 or i == k:
+      return False
+    if r == n-1:
+      return True
 
 # Recebe um n inteiro qualquer, que definirá o range de geração do número primo entre 10^n e 10^{n+2}
 # Retorna um inteiro provavelmente primo 
@@ -142,9 +151,9 @@ def descriptar(blocos:list, n:int, d:int) -> str:
     return texto
  
 # Função para testar a efetividade do código
-def test():
-    n, e, d, p, q, inverso_p_em_q, inverso_q_em_p, modulo_reduzido_d_em_pmenos,  modulo_reduzido_d_em_qmenos = gera_chaves(0)
-    texto = input("Frase qualquer: ")
+def teste():
+    n, e, d, p, q, inverso_p_em_q, inverso_q_em_p, modulo_reduzido_d_em_pmenos,  modulo_reduzido_d_em_qmenos = gera_chaves(50)
+    texto = "Reticências sempre ajudam..."
     print(descriptar((encriptar(texto,n,e)),n,d))
 
-print(gera_primos(16))
+teste()
