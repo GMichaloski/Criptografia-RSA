@@ -38,12 +38,10 @@ def miller_rabin(n: int) -> bool:
 # Recebe um n inteiro qualquer, que definirá o range de geração do número primo entre 10^n e 10^{n+2}
 # Retorna um inteiro provavelmente primo 
 def gera_primos(n: int) -> int:
-    buscando_primo = True
-    while buscando_primo == True:
+    while True:
         rand_num = random.randrange(10**n + 1,10**(n+2))
         if(all(miller_rabin(rand_num) == True for i in range(10))):
-            buscando_primo = False
-    return rand_num
+            return rand_num
 
 # Recebe dois inteiros a e b quaisquer
 # Retorna o a em módulo b em sua forma reduzida
